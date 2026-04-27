@@ -51,19 +51,40 @@ export default function Footer() {
               transparency, competitive pricing, and building long-term
               relationships through excellence in export.
             </p>
-            <div className="space-y-3 pt-2">
-              <p className="text-sm font-semibold text-white">Follow Us</p>
-              <div className="flex items-center gap-3 text-sm text-white/78">
-                <InstagramIcon className="h-5 w-5" strokeWidth={1.9} />
-                <span>Globetrade Corp.</span>
+            <div className="grid gap-8 pt-2 sm:grid-cols-2">
+              <div className="space-y-3">
+                <p className="text-sm font-semibold text-white">Follow Us</p>
+                <div className="flex items-center gap-3 text-sm text-white/78">
+                  <InstagramIcon className="h-5 w-5" strokeWidth={1.9} />
+                  <span>Globetrade Corp.</span>
+                </div>
+                <div className="flex items-center gap-3 text-sm text-white/78">
+                  <FacebookIcon className="h-5 w-5" strokeWidth={1.9} />
+                  <span>Globetrade Corp.</span>
+                </div>
+                <div className="flex items-center gap-3 text-sm text-white/78">
+                  <LinkedinIcon className="h-5 w-5" strokeWidth={1.9} />
+                  <span>Globetrade Corp.</span>
+                </div>
               </div>
-              <div className="flex items-center gap-3 text-sm text-white/78">
-                <FacebookIcon className="h-5 w-5" strokeWidth={1.9} />
-                <span>Globetrade Corp.</span>
-              </div>
-              <div className="flex items-center gap-3 text-sm text-white/78">
-                <LinkedinIcon className="h-5 w-5" strokeWidth={1.9} />
-                <span>Globetrade Corp.</span>
+              <div className="space-y-3">
+                <p className="text-sm font-semibold text-white">Legal</p>
+                <a
+                  href="/privacy-policy"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="block text-sm text-white/78 hover:text-white"
+                >
+                  Privacy Policy
+                </a>
+                <a
+                  href="/terms-of-use"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="block text-sm text-white/78 hover:text-white"
+                >
+                  Terms of Use
+                </a>
               </div>
             </div>
           </div>

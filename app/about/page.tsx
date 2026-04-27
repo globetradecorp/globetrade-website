@@ -1,12 +1,26 @@
 import type { Metadata } from "next";
+import Image from "next/image";
 import Section from "@/components/Section";
 import { siteContent } from "@/lib/constants";
+import { client } from "@/lib/sanity";
 
 export const metadata: Metadata = {
   title: "About",
 };
 
-export default function AboutPage() {
+type Certification = {
+  title: string;
+  imageUrl: string;
+};
+
+export default async function AboutPage() {
+  const certifications: Certification[] = await client.fetch(`
+    *[_type == "certification"] | order(order asc) {
+      title,
+      "imageUrl": logo.asset->url
+    }
+  `);
+
   return (
     <>
       <Section className="pb-20 pt-16 sm:pb-24 sm:pt-24">
@@ -34,6 +48,28 @@ export default function AboutPage() {
           </div>
         ))}
       </Section>
+
+      {certifications.length > 0 && (
+        <Section className="pb-24">
+          <div className="space-y-6">
+            <h2 className="font-heading text-3xl font-bold text-primary sm:text-4xl">
+              Licenses & Certifications
+            </h2>
+            <div className="flex flex-wrap items-center justify-center gap-10 md:gap-12 lg:gap-16">
+              {certifications.map((certification) => (
+                <Image
+                  key={certification.title}
+                  src={certification.imageUrl}
+                  alt={certification.title}
+                  width={240}
+                  height={160}
+                  className="h-32 w-auto object-contain mx-auto"
+                />
+              ))}
+            </div>
+          </div>
+        </Section>
+      )}
     </>
   );
 }

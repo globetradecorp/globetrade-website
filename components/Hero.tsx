@@ -44,7 +44,7 @@ export default function Hero({ title, tagline, description }: HeroProps) {
               alt=""
               width={320}
               height={320}
-              className="max-w-[280px] sm:max-w-[320px] mx-auto object-contain opacity-90"
+              className="w-32 h-auto mx-auto object-contain opacity-90 md:w-64"
             />
           </div>
         </div>

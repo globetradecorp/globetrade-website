@@ -5,7 +5,9 @@ import ProductCard from "@/components/ProductCard";
 import Section from "@/components/Section";
 import WhyChoose from "@/components/WhyChoose";
 import { siteContent } from "@/lib/constants";
-import { getFeaturedProducts } from "@/lib/products";
+import { getProducts } from "@/lib/products";
+
+export const dynamic = "force-dynamic";
 
 const whyPartnerItems = [
   {
@@ -23,7 +25,18 @@ const whyPartnerItems = [
 ];
 
 export default async function Home() {
-  const featuredProducts = await getFeaturedProducts();
+  const products: Array<{
+    _id: string;
+    productName: string;
+    hsn: string;
+    details?: string[];
+    image: string;
+    showOnHomepage?: boolean;
+  }> = await getProducts();
+  console.log("SANITY PRODUCTS:", products);
+  const homepageProducts = products
+    .filter((product) => product.showOnHomepage === true)
+    .slice(0, 3);
 
   return (
     <>
@@ -76,8 +89,8 @@ export default async function Home() {
         </div>
 
         <div className="grid gap-6 lg:grid-cols-3">
-          {featuredProducts.map((product) => (
-            <ProductCard key={product.name} product={product} />
+          {homepageProducts.map((product) => (
+            <ProductCard key={product._id} product={product} />
           ))}
         </div>
       </Section>

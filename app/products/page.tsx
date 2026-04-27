@@ -2,14 +2,21 @@ import type { Metadata } from "next";
 import ProductCard from "@/components/ProductCard";
 import Section from "@/components/Section";
 import { siteContent } from "@/lib/constants";
-import { getAllProducts } from "@/lib/products";
+import { getProducts } from "@/lib/products";
 
 export const metadata: Metadata = {
   title: "Products",
 };
 
 export default async function ProductsPage() {
-  const products = await getAllProducts();
+  const products: Array<{
+    _id: string;
+    productName: string;
+    hsn: string;
+    details?: string[];
+    image: string;
+    showOnHomepage?: boolean;
+  }> = await getProducts();
 
   return (
     <>
@@ -29,7 +36,7 @@ export default async function ProductsPage() {
 
       <Section className="pb-24" containerClassName="grid gap-6 md:grid-cols-2 xl:grid-cols-3">
         {products.map((product) => (
-          <ProductCard key={product.name} product={product} />
+          <ProductCard key={product._id} product={product} />
         ))}
       </Section>
     </>

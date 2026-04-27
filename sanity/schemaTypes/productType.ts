@@ -5,13 +5,13 @@ export const productType = {
   fields: [
     {
       name: "name",
-      title: "Name",
+      title: "Product Name",
       type: "string",
       validation: (Rule: { required: () => unknown }) => Rule.required(),
     },
     {
       name: "image",
-      title: "Image",
+      title: "Product Image",
       type: "image",
       options: {
         hotspot: true,
@@ -30,8 +30,8 @@ export const productType = {
       of: [{ type: "string" }],
     },
     {
-      name: "featured",
-      title: "Featured",
+      name: "isFeatured",
+      title: "Show on Homepage",
       type: "boolean",
       initialValue: false,
     },
