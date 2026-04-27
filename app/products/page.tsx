@@ -2,12 +2,15 @@ import type { Metadata } from "next";
 import ProductCard from "@/components/ProductCard";
 import Section from "@/components/Section";
 import { siteContent } from "@/lib/constants";
+import { getAllProducts } from "@/lib/products";
 
 export const metadata: Metadata = {
   title: "Products",
 };
 
-export default function ProductsPage() {
+export default async function ProductsPage() {
+  const products = await getAllProducts();
+
   return (
     <>
       <Section className="pb-12 pt-16 sm:pb-16 sm:pt-24">
@@ -25,7 +28,7 @@ export default function ProductsPage() {
       </Section>
 
       <Section className="pb-24" containerClassName="grid gap-6 md:grid-cols-2 xl:grid-cols-3">
-        {siteContent.products.map((product) => (
+        {products.map((product) => (
           <ProductCard key={product.name} product={product} />
         ))}
       </Section>

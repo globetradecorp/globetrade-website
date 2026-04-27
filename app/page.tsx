@@ -5,6 +5,7 @@ import ProductCard from "@/components/ProductCard";
 import Section from "@/components/Section";
 import WhyChoose from "@/components/WhyChoose";
 import { siteContent } from "@/lib/constants";
+import { getFeaturedProducts } from "@/lib/products";
 
 const whyPartnerItems = [
   {
@@ -21,7 +22,9 @@ const whyPartnerItems = [
   },
 ];
 
-export default function Home() {
+export default async function Home() {
+  const featuredProducts = await getFeaturedProducts();
+
   return (
     <>
       <Hero
@@ -35,10 +38,10 @@ export default function Home() {
           <h2 className="font-heading text-3xl font-bold text-primary sm:text-4xl">
             About Us
           </h2>
-          <p className="text-lg leading-8 text-slate-600">
+          <p className="text-base leading-relaxed text-slate-600">
             {siteContent.about.description}
           </p>
-          <p className="text-base leading-8 text-slate-600">
+          <p className="text-base leading-relaxed text-slate-600">
             {siteContent.about.extra}
           </p>
           <Link
@@ -73,7 +76,7 @@ export default function Home() {
         </div>
 
         <div className="grid gap-6 lg:grid-cols-3">
-          {siteContent.products.slice(0, 3).map((product) => (
+          {featuredProducts.map((product) => (
             <ProductCard key={product.name} product={product} />
           ))}
         </div>

@@ -1,14 +1,12 @@
 import Image from "next/image";
-import { siteContent } from "@/lib/constants";
-
-type Product = (typeof siteContent.products)[number];
+import type { ProductItem } from "@/lib/products";
 
 type ProductCardProps = {
-  product: Product;
+  product: ProductItem;
 };
 
 export default function ProductCard({ product }: ProductCardProps) {
-  const imageSrc = `/images/${encodeURIComponent(product.name)}.jpg`;
+  const imageSrc = product.imageUrl ?? `/images/${encodeURIComponent(product.name)}.jpg`;
 
   return (
     <article className="group h-full rounded-[1.75rem] border border-nature/12 bg-white p-6 shadow-sm hover:-translate-y-1 hover:shadow-md sm:p-7">
@@ -40,7 +38,7 @@ export default function ProductCard({ product }: ProductCardProps) {
                 {product.name}
               </h3>
             </div>
-            <span className="rounded-full bg-nature/8 px-3 py-1 text-xs font-semibold text-nature">
+            <span className="whitespace-nowrap rounded-full bg-nature/8 px-3 py-1 text-xs font-semibold text-nature">
               HSN {product.hsn}
             </span>
           </div>

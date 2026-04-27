@@ -20,7 +20,7 @@ export default function Navbar() {
 
   return (
     <header className="sticky top-0 z-50 border-b border-accent/10 bg-[#f8faf8]/95 backdrop-blur-xl">
-      <div className="mx-auto flex max-w-7xl items-center justify-between px-4 py-3 sm:px-6 sm:py-4 lg:px-8">
+      <div className="mx-auto flex max-w-7xl items-center justify-between px-4 py-1.5 sm:px-6 sm:py-2 lg:px-8">
         <Link
   href="/"
   className="flex items-center gap-3 sm:gap-4"
@@ -30,11 +30,10 @@ export default function Navbar() {
   <Image
     src="/images/logo.svg"
     alt={`${brandName} logo`}
-    width={200}
-    height={200}
+    width={260}
+    height={100}
     priority
-    className="h-[70px] sm:h-[85px] md:h-[95px] w-auto object-contain"
-    style={{ transform: "scale(1.6)", transformOrigin: "center" }}
+    className="h-[64px] sm:h-[72px] w-auto object-contain"
   />
 </div>
 
