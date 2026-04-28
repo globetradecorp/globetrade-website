@@ -7,7 +7,7 @@ import WhyChoose from "@/components/WhyChoose";
 import { siteContent } from "@/lib/constants";
 import { getProducts } from "@/lib/products";
 
-export const dynamic = "force-dynamic";
+export const revalidate = 60;
 
 const whyPartnerItems = [
   {

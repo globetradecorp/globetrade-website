@@ -8,6 +8,8 @@ export const metadata: Metadata = {
   title: "About",
 };
 
+export const revalidate = 60;
+
 type Certification = {
   title: string;
   imageUrl: string;
