@@ -90,7 +90,6 @@ export default function Footer() {
           </div>
 
           <div className="space-y-4 text-sm leading-7 text-white/78">
-            <p className="font-semibold text-white">{siteContent.contact.person}</p>
             <div className="flex items-start gap-2">
               <MapPin className="mt-1 h-6 w-6 shrink-0 text-accent" strokeWidth={2} />
               <p className="whitespace-pre-line">{siteContent.contact.address}</p>

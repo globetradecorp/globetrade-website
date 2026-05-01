@@ -1,5 +1,5 @@
 import type { Metadata } from "next";
-import { Mail, MapPin, Phone } from "lucide-react";
+import { Mail, MapPin, Phone, Send } from "lucide-react";
 import Section from "@/components/Section";
 import { siteContent } from "@/lib/constants";
 
@@ -81,7 +81,8 @@ export default function ContactPage() {
               type="submit"
               className="inline-flex items-center justify-center rounded-full bg-accent px-6 py-3 text-sm font-semibold text-white shadow-sm hover:bg-accent/92"
             >
-              Contact Us
+              <span>Send</span>
+              <Send className="ml-2 h-4 w-4" strokeWidth={2} />
             </button>
           </form>
         </div>

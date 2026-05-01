@@ -52,7 +52,10 @@ export default async function Home() {
             About Us
           </h2>
           <p className="text-base leading-relaxed text-slate-600">
-            {siteContent.about.description}
+            {siteContent.about.description.replace(
+              "Pune, Maharashtra",
+              "Pune, Maharashtra, India",
+            )}
           </p>
           <p className="text-base leading-relaxed text-slate-600">
             {siteContent.about.extra}
@@ -121,8 +124,8 @@ export default async function Home() {
                 Start a conversation for your next export requirement
               </h2>
               <p className="text-base leading-8 text-slate-600">
-                Connect with {siteContent.contact.person} for sourcing
-                discussions, shipment planning, and trade inquiries.
+                Connect with us for sourcing discussions, shipment planning,
+                and trade inquiries.
               </p>
             </div>
             <Link

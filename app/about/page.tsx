@@ -31,7 +31,10 @@ export default async function AboutPage() {
             About Us
           </h1>
           <p className="text-base leading-relaxed text-slate-600">
-            {siteContent.about.description}
+            {siteContent.about.description.replace(
+              "Pune, Maharashtra",
+              "Pune, Maharashtra, India",
+            )}
           </p>
           <p className="text-base leading-relaxed text-slate-600">
             {siteContent.about.extra}
