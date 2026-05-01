@@ -50,13 +50,15 @@ export default function Hero({ title, tagline, description }: HeroProps) {
         </div>
 
         <div className="flex flex-col items-center lg:items-start">
-          <Image
-            src="/images/logo.svg"
-            alt="Globetrade logo"
-            width={120}
-            height={120}
-            className="mb-3 hidden object-contain lg:block"
-          />
+          <div className="hidden w-full lg:flex lg:justify-end">
+            <Image
+              src="/images/logo.svg"
+              alt="Globetrade logo"
+              width={180}
+              height={180}
+              className="mb-3 object-contain"
+            />
+          </div>
           <div className="rounded-[2rem] border border-border-soft bg-white p-8 shadow-sm sm:p-10">
             <div className="space-y-6">
               <div className="space-y-3">
