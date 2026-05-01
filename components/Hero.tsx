@@ -50,7 +50,7 @@ export default function Hero({ title, tagline, description }: HeroProps) {
         </div>
 
         <div className="flex flex-col items-center lg:items-start">
-          <div className="hidden w-full lg:flex lg:justify-end">
+          <div className="hidden w-full lg:flex lg:justify-center">
             <Image
               src="/images/logo.svg"
               alt="Globetrade logo"
