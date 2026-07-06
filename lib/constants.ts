@@ -78,6 +78,6 @@ Near Akashdeep Society, Lane No. 29-B,
 Dhayari, Pune 411041`,
     person: "Mr. Ram Saraf",
     phone: "+91 8208385616",
-    email: "rishaansglobe@gmail.com",
+    email: "info@globetradecorp.com",
   },
 };

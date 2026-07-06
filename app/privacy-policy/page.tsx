@@ -136,7 +136,7 @@ export default function PrivacyPolicyPage() {
               contact us:
             </p>
             <p className="text-base leading-relaxed text-slate-600">
-              By Email: rishaansglobe@gmail.com
+              By Email: info@globetradecorp.com
             </p>
             <p className="text-base leading-relaxed text-slate-600">
               By Phone: +91 8208385616
@@ -151,3 +151,4 @@ export default function PrivacyPolicyPage() {
     </Section>
   );
 }
+

@@ -128,7 +128,7 @@ export default function TermsOfUsePage() {
               For any questions regarding these terms, please contact:
             </p>
             <p className="text-base leading-relaxed text-slate-600">
-              Email: rishaansglobe@gmail.com
+              Email: info@globetradecorp.com
             </p>
             <p className="text-base leading-relaxed text-slate-600">
               Address: Shop No. 2, Gound Floor, Gayatri Bungalow, Lane no.
@@ -140,3 +140,4 @@ export default function TermsOfUsePage() {
     </Section>
   );
 }
+
