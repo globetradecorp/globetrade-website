@@ -36,7 +36,7 @@ export default function ContactPage() {
             </h2>
           </div>
 
-          <form action="https://formspree.io/f/mojyrqyb" method="POST" className="mt-8 space-y-5">
+          <form action="https://formspree.io/f/mvzjyydo" method="POST" className="mt-8 space-y-5">
             <label className="block space-y-2">
               <span className="text-sm font-medium text-slate-700">Name</span>
               <input
@@ -137,3 +137,4 @@ export default function ContactPage() {
     </>
   );
 }
+
