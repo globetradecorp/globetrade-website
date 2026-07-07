@@ -75,7 +75,9 @@ export const siteContent = {
   contact: {
     address: `Shop No. 2, Ground Floor, Gayatri Bungalow,
 Near Akashdeep Society, Lane No. 29-B,
-Dhayari, Pune 411041`,
+Dhayari, Pune - 411041
+State: Maharashtra
+Country: India`,
     person: "Mr. Ram Saraf",
     phone: "+91 8208385616",
     email: "info@globetradecorp.com",
