@@ -1,5 +1,4 @@
-import { heroContentType } from "./heroContentType";
-import { heroSlideType } from "./heroSlideType";
+import { heroSectionType } from "./heroSectionType";
 import { productType } from "./productType";
 
-export const schemaTypes = [productType, heroSlideType, heroContentType];
+export const schemaTypes = [productType, heroSectionType];

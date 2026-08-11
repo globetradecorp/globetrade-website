@@ -5,7 +5,7 @@ import ProductCard from "@/components/ProductCard";
 import Section from "@/components/Section";
 import WhyChoose from "@/components/WhyChoose";
 import { siteContent } from "@/lib/constants";
-import { getHeroContent, getHeroSlides } from "@/lib/hero";
+import { getHeroContent } from "@/lib/hero";
 import { getProducts } from "@/lib/products";
 
 export const revalidate = 60;
@@ -34,13 +34,7 @@ export default async function Home() {
     image: string;
     showOnHomepage?: boolean;
   }> = await getProducts();
-  const [heroContent, heroSlides] = await Promise.all([
-    getHeroContent(),
-    getHeroSlides(),
-  ]);
-  const heroHeading = `Premium Indian Herbs, Fruits & Vegetables
-Exported Worldwide with Quality
-Trusted by Global Buyers`;
+  const heroContent = await getHeroContent();
   const homepageProducts = products
     .filter((product) => product.showOnHomepage === true)
     .slice(0, 3);
@@ -48,9 +42,8 @@ Trusted by Global Buyers`;
   return (
     <>
       <Hero
-        heading={heroHeading}
-        tagline={heroContent.smallTagline}
-        slides={heroSlides}
+        heading={heroContent.heading}
+        slides={heroContent.slides}
       />
 
       <Section className="py-24 sm:py-28">
