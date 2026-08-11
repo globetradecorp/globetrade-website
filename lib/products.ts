@@ -8,7 +8,8 @@ export async function getProducts() {
       hsn,
       details,
       "showOnHomepage": isFeatured,
-      "image": image.asset->url
+      "image": image.asset->url,
+      "category": productCategory
     }
   `);
 }

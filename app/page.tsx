@@ -5,6 +5,7 @@ import ProductCard from "@/components/ProductCard";
 import Section from "@/components/Section";
 import WhyChoose from "@/components/WhyChoose";
 import { siteContent } from "@/lib/constants";
+import { getHeroContent, getHeroSlides } from "@/lib/hero";
 import { getProducts } from "@/lib/products";
 
 export const revalidate = 60;
@@ -33,7 +34,13 @@ export default async function Home() {
     image: string;
     showOnHomepage?: boolean;
   }> = await getProducts();
-  console.log("SANITY PRODUCTS:", products);
+  const [heroContent, heroSlides] = await Promise.all([
+    getHeroContent(),
+    getHeroSlides(),
+  ]);
+  const heroHeading = `Premium Indian Herbs, Fruits & Vegetables
+Exported Worldwide with Quality
+Trusted by Global Buyers`;
   const homepageProducts = products
     .filter((product) => product.showOnHomepage === true)
     .slice(0, 3);
@@ -41,9 +48,9 @@ export default async function Home() {
   return (
     <>
       <Hero
-        title="Globetrade Corp."
-        tagline={siteContent.home.tagline}
-        description={siteContent.home.description}
+        heading={heroHeading}
+        tagline={heroContent.smallTagline}
+        slides={heroSlides}
       />
 
       <Section className="py-24 sm:py-28">

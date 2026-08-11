@@ -35,5 +35,18 @@ export const productType = {
       type: "boolean",
       initialValue: false,
     },
+    {
+      name: "productCategory",
+      title: "Product Category",
+      type: "string",
+      options: {
+        list: [
+          { title: "Herbs", value: "Herbs" },
+          { title: "Fruits", value: "Fruits" },
+          { title: "Vegetables", value: "Vegetables" },
+        ],
+        layout: "radio",
+      },
+    },
   ],
 };

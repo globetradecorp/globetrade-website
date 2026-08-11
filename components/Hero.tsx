@@ -1,92 +1,98 @@
+"use client";
+
 import Image from "next/image";
 import Link from "next/link";
-import Section from "@/components/Section";
+import { useEffect, useMemo, useState } from "react";
 
-type HeroProps = {
-  title: string;
-  tagline: string;
-  description: string;
+type HeroSlide = {
+  _id: string;
+  image: string;
+  altText: string;
 };
 
-export default function Hero({ title, tagline, description }: HeroProps) {
-  return (
-    <Section className="pb-10 pt-10 sm:pb-12 sm:pt-12 lg:pb-14 lg:pt-6">
-      <div className="grid gap-12 lg:grid-cols-[1.05fr_0.95fr] lg:items-center">
-        <div className="space-y-6">
-          <span className="inline-flex rounded-full border border-accent/18 bg-accent/8 px-4 py-1 text-xs font-semibold uppercase tracking-[0.2em] text-primary">
-            {tagline}
-          </span>
-          <div className="space-y-6">
-            <h1 className="text-balance font-heading text-5xl font-bold tracking-tight text-primary sm:text-6xl lg:text-[4.45rem]">
-              {title}
-            </h1>
-            <p className="max-w-3xl text-lg leading-8 text-slate-600 sm:text-[1.15rem]">
-              {description}
-            </p>
-          </div>
-          <div className="flex flex-col gap-4 sm:flex-row">
-            <Link
-              href="/contact"
-              className="inline-flex items-center justify-center rounded-full bg-accent px-7 py-3.5 text-sm font-semibold text-white shadow-sm hover:bg-accent/92"
-            >
-              Contact Us
-            </Link>
-            <Link
-              href="/products"
-              className="inline-flex items-center justify-center rounded-full border border-primary bg-transparent px-7 py-3.5 text-sm font-semibold text-primary hover:border-secondary hover:bg-secondary/8"
-            >
-              Explore Products
-            </Link>
-          </div>
-          <div className="lg:hidden">
-            <Image
-              src="/images/logo.svg"
-              alt=""
-              width={320}
-              height={320}
-              className="w-32 h-auto mx-auto object-contain opacity-90 md:w-64"
-            />
-          </div>
-        </div>
+type HeroProps = {
+  heading: string;
+  tagline?: string;
+  slides: HeroSlide[];
+};
 
-        <div className="flex flex-col items-center lg:items-start">
-          <div className="hidden w-full lg:flex lg:justify-center">
+export default function Hero({ heading, tagline, slides }: HeroProps) {
+  const [activeIndex, setActiveIndex] = useState(0);
+
+  const headingLines = useMemo(
+    () => heading.split("\n").map((line) => line.trim()).filter(Boolean).slice(0, 3),
+    [heading],
+  );
+
+  useEffect(() => {
+    if (slides.length <= 1) {
+      return;
+    }
+
+    const interval = window.setInterval(() => {
+      setActiveIndex((current) => (current + 1) % slides.length);
+    }, 3800);
+
+    return () => window.clearInterval(interval);
+  }, [slides.length]);
+
+  return (
+    <section className="relative min-h-[calc(100vh-82px)] overflow-hidden">
+      <div className="absolute inset-0">
+        {slides.map((slide, index) => (
+          <div
+            key={slide._id}
+            className={`absolute inset-0 transition-opacity duration-1000 ${
+              index === activeIndex ? "opacity-100" : "opacity-0"
+            }`}
+          >
             <Image
-              src="/images/logo.svg"
-              alt="Globetrade logo"
-              width={180}
-              height={180}
-              className="mb-3 object-contain"
+              src={slide.image}
+              alt={slide.altText}
+              fill
+              priority={index === 0}
+              sizes="100vw"
+              className="object-cover"
             />
           </div>
-          <div className="rounded-[2rem] border border-border-soft bg-white p-8 shadow-sm sm:p-10">
-            <div className="space-y-6">
-              <div className="space-y-3">
-                <p className="text-sm font-semibold uppercase tracking-[0.18em] text-accent">
-                  Premium Agricultural Exports
-                </p>
-                <p className="font-heading text-3xl font-bold leading-tight text-primary">
-                  Reliable sourcing and export support for global buyers.
-                </p>
-              </div>
-              <div className="space-y-4 rounded-[1.5rem] border border-accent/10 bg-background-subtle p-6">
-                <div className="flex items-start gap-3">
-                  <span className="mt-2 h-2 w-2 rounded-full bg-[#2DA7C7]" />
-                  <p className="text-sm leading-7 text-slate-600">
-                    Direct access to fresh farm produce with a focus on consistent quality.
-                  </p>
-                </div>
-                <div className="flex items-start gap-3">
-                  <span className="mt-2 h-2 w-2 rounded-full bg-[#2DA7C7]" />
-                  <p className="text-sm leading-7 text-slate-600">
-                    Practical logistics planning for dependable international shipments.
-                  </p>
-                </div>
-              </div>
+        ))}
+        <div className="absolute inset-0 bg-[linear-gradient(90deg,rgba(30,58,108,0.62)_0%,rgba(30,58,108,0.42)_34%,rgba(30,58,108,0.18)_58%,rgba(30,58,108,0.1)_100%)]" />
+      </div>
+
+      <div className="relative mx-auto flex min-h-[calc(100vh-82px)] max-w-7xl items-center px-4 py-16 sm:px-6 lg:px-8">
+        <div className="max-w-3xl space-y-8 lg:max-w-[52%]">
+          {tagline ? (
+            <span className="inline-flex rounded-full border border-white/30 bg-white/10 px-5 py-2 text-xs font-semibold uppercase tracking-[0.28em] text-white/88 backdrop-blur-sm">
+              {tagline}
+            </span>
+          ) : null}
+
+          <div className="space-y-6">
+            <h1 className="font-heading text-[1.95rem] font-bold tracking-tight text-white sm:text-[2.15rem] lg:text-[2.2rem] lg:leading-[1.04]">
+              {headingLines.map((line) => (
+                <span key={line} className="block">
+                  {line}
+                </span>
+              ))}
+            </h1>
+
+            <div className="flex flex-col gap-4 sm:flex-row">
+              <Link
+                href="/contact"
+                className="inline-flex items-center justify-center rounded-full bg-accent px-7 py-3.5 text-sm font-semibold text-white shadow-sm hover:bg-accent/92"
+              >
+                Contact Us
+              </Link>
+              <Link
+                href="/products"
+                className="inline-flex items-center justify-center rounded-full border border-white/55 bg-white/10 px-7 py-3.5 text-sm font-semibold text-white backdrop-blur-sm hover:border-white hover:bg-white/16"
+              >
+                Explore Products
+              </Link>
             </div>
           </div>
         </div>
       </div>
-    </Section>
+    </section>
   );
 }
