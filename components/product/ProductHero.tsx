@@ -11,6 +11,8 @@ export default function ProductHero({ product }: ProductHeroProps) {
   const displayName = product.name || product.productName;
   const category = product.category || product.productCategory || "Agricultural Export";
   const heroImage = product.heroImage || product.image || "/images/hero/moringa-hero.png";
+  const inquireText = product.inquireCtaText || "Inquire for Export";
+  const sourcingText = product.sourcingCtaText || "Explore Sourcing";
 
   return (
     <div className="space-y-6 pt-2 sm:pt-4">
@@ -76,14 +78,14 @@ export default function ProductHero({ product }: ProductHeroProps) {
               href="/contact"
               className="inline-flex items-center justify-center gap-2 rounded-full bg-accent px-8 py-3.5 text-sm font-semibold text-white shadow-xs transition hover:bg-accent/90"
             >
-              <span>Inquire for Export</span>
+              <span>{inquireText}</span>
               <Send className="h-4 w-4" />
             </Link>
             <a
               href="#sourcing"
               className="inline-flex items-center justify-center rounded-full border border-primary/20 bg-background-subtle px-6 py-3.5 text-sm font-semibold text-primary transition hover:border-primary/40 hover:bg-white"
             >
-              Explore Sourcing
+              {sourcingText}
             </a>
           </div>
         </div>

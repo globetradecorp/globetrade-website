@@ -126,6 +126,8 @@ export type Product = {
   seoDescription?: string;
   overview?: string;
   processingMethod?: string;
+  inquireCtaText?: string;
+  sourcingCtaText?: string;
   pageSections?: PageSection[];
 };
 
@@ -150,9 +152,59 @@ export function getProductSlug(product: { slug?: string; name?: string; productN
   return slugify(name);
 }
 
+const pageSectionsProjection = `
+  pageSections[] {
+    _type,
+    _key,
+    badge,
+    title,
+    description,
+    overview,
+    processingMethod,
+    nutrientsList,
+    applicationsText,
+    intro,
+    points,
+    col1Header,
+    col2Header,
+    rows[] {
+      feature,
+      col1Value,
+      col2Value
+    },
+    varietiesTitle,
+    varieties,
+    specificationsTitle,
+    specifications,
+    note,
+    commitments,
+    ctaText,
+    ctaLink,
+    faqs[] {
+      question,
+      answer
+    },
+    content,
+    bulletPoints
+  }
+`;
+
+type RawSanityProduct = Product & {
+  pageDoc?: {
+    heroImage?: string;
+    overview?: string;
+    processingMethod?: string;
+    inquireCtaText?: string;
+    sourcingCtaText?: string;
+    seoTitle?: string;
+    seoDescription?: string;
+    pageSections?: PageSection[];
+  };
+};
+
 export async function getProducts(): Promise<Product[]> {
   try {
-    const products: Product[] = await client.fetch(`
+    const rawProducts: RawSanityProduct[] = await client.fetch(`
       *[_type == "product"] | order(name asc) {
         _id,
         name,
@@ -163,50 +215,49 @@ export async function getProducts(): Promise<Product[]> {
         details,
         "showOnHomepage": isFeatured,
         "image": image.asset->url,
-        "heroImage": heroImage.asset->url,
         "category": productCategory,
         productCategory,
-        seoTitle,
-        seoDescription,
-        overview,
-        processingMethod,
-        pageSections[] {
-          _type,
-          _key,
-          badge,
-          title,
-          description,
+        "pageDoc": coalesce(
+          dedicatedPage->,
+          *[_type == "productPage" && references(^._id)][0]
+        ) {
+          "heroImage": heroImage.asset->url,
           overview,
-          processingMethod,
-          nutrientsList,
-          applicationsText,
-          intro,
-          points,
-          col1Header,
-          col2Header,
-          rows[] {
-            feature,
-            col1Value,
-            col2Value
-          },
-          varietiesTitle,
-          varieties,
-          specificationsTitle,
-          specifications,
-          note,
-          commitments,
-          ctaText,
-          ctaLink,
-          faqs[] {
-            question,
-            answer
-          },
-          content,
-          bulletPoints
+          "processingMethod": harvestingProcessing,
+          inquireCtaText,
+          sourcingCtaText,
+          seoTitle,
+          seoDescription,
+          ${pageSectionsProjection}
         }
       }
     `);
-    return products || [];
+
+    // Combine Product with its referenced Dedicated Product Page automatically
+    return (rawProducts || []).map((p) => {
+      const page = p.pageDoc;
+      return {
+        _id: p._id,
+        name: p.name,
+        productName: p.productName || p.name,
+        slug: p.slug,
+        subtitle: p.subtitle,
+        hsn: p.hsn,
+        details: p.details,
+        showOnHomepage: p.showOnHomepage,
+        image: p.image,
+        category: p.category,
+        productCategory: p.productCategory,
+        heroImage: page?.heroImage || p.image,
+        overview: page?.overview || p.overview,
+        processingMethod: page?.processingMethod || p.processingMethod,
+        inquireCtaText: page?.inquireCtaText || p.inquireCtaText,
+        sourcingCtaText: page?.sourcingCtaText || p.sourcingCtaText,
+        seoTitle: page?.seoTitle || p.seoTitle,
+        seoDescription: page?.seoDescription || p.seoDescription,
+        pageSections: page?.pageSections && page.pageSections.length > 0 ? page.pageSections : p.pageSections,
+      };
+    });
   } catch (error) {
     console.error("Failed to fetch products from Sanity:", error);
     return [];

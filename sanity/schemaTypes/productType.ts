@@ -4,8 +4,7 @@ export const productType = {
   type: "document",
   fieldsets: [
     { name: "core", title: "Core Information" },
-    { name: "seo", title: "SEO & Search Engine Data", options: { collapsible: true, collapsed: true } },
-    { name: "builder", title: "Page Builder (Custom Reorderable Sections)" },
+    { name: "pageLink", title: "Dedicated Page Link" },
   ],
   fields: [
     {
@@ -53,13 +52,6 @@ export const productType = {
       options: { hotspot: true },
     },
     {
-      name: "heroImage",
-      title: "Product Detail Hero Image",
-      type: "image",
-      fieldset: "core",
-      options: { hotspot: true },
-    },
-    {
       name: "hsn",
       title: "HSN Code",
       type: "string",
@@ -80,34 +72,11 @@ export const productType = {
       initialValue: true,
     },
     {
-      name: "seoTitle",
-      title: "SEO Title",
-      type: "string",
-      fieldset: "seo",
-    },
-    {
-      name: "seoDescription",
-      title: "SEO Meta Description",
-      type: "text",
-      rows: 3,
-      fieldset: "seo",
-    },
-    {
-      name: "pageSections",
-      title: "Page Sections (Page Builder)",
-      type: "array",
-      fieldset: "builder",
-      of: [
-        { type: "overviewSection" },
-        { type: "nutrientsSection" },
-        { type: "originSection" },
-        { type: "comparisonSection" },
-        { type: "sourcingSection" },
-        { type: "commitmentsSection" },
-        { type: "partnerCtaSection" },
-        { type: "faqSection" },
-        { type: "customSection" },
-      ],
+      name: "dedicatedPage",
+      title: "Associated Dedicated Product Page",
+      type: "reference",
+      to: [{ type: "productPage" }],
+      fieldset: "pageLink",
     },
   ],
 };

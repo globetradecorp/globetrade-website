@@ -354,21 +354,21 @@ export default async function ProductDetailPage({ params }: ProductPageProps) {
   return (
     <Section
       className="py-6 sm:py-10"
-      containerClassName="max-w-[88rem] 2xl:max-w-[92rem] space-y-8 sm:space-y-12"
+      containerClassName="max-w-7xl space-y-8 sm:space-y-12"
     >
-      {/* Full-Width Hero Section */}
-      <div className="max-w-6xl mx-auto w-full">
+      {/* Full-Width Hero Section - Perfectly bounded and aligned */}
+      <div className="w-full">
         <ProductHero product={product} />
       </div>
 
-      {/* Main Layout: Spacious Full-Width Content Cards + Floating Sticky TOC on the Right */}
-      <div className="flex flex-col xl:flex-row gap-8 xl:gap-12 items-start justify-center max-w-[88rem] mx-auto w-full">
-        {/* Large Content Column - Occupies full spacious width (max-w-6xl) */}
-        <div className="w-full max-w-6xl space-y-8 sm:space-y-12 flex-1 min-w-0">
-          {/* Mobile TOC (< xl) */}
+      {/* Main Layout: Symmetrical Grid with Large Content Column + Sticky TOC Sidebar */}
+      <div className="grid grid-cols-1 xl:grid-cols-[minmax(0,1fr)_320px] 2xl:grid-cols-[minmax(0,1fr)_340px] gap-8 xl:gap-10 items-start w-full">
+        {/* Large Content Column - Occupies generous and balanced width matching the hero alignment */}
+        <div className="w-full space-y-8 sm:space-y-12 min-w-0">
+          {/* Mobile TOC - Shows ONLY the Jump To dropdown, never the full sidebar card */}
           {tocItems.length > 1 && (
             <div className="xl:hidden">
-              <ProductToc items={tocItems} />
+              <ProductToc items={tocItems} variant="mobile-only" />
             </div>
           )}
 
@@ -654,10 +654,10 @@ export default async function ProductDetailPage({ params }: ProductPageProps) {
           })}
         </div>
 
-        {/* Floating Sticky Sidebar TOC Navigation (Desktop >= xl) */}
+        {/* Floating Sticky Sidebar TOC Navigation (Desktop only) */}
         {tocItems.length > 1 && (
-          <div className="hidden xl:block w-72 shrink-0">
-            <ProductToc items={tocItems} />
+          <div className="hidden xl:block w-full">
+            <ProductToc items={tocItems} variant="desktop-only" />
           </div>
         )}
       </div>
