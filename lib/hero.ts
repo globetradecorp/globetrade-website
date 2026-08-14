@@ -25,6 +25,7 @@ const fallbackHeading =
 export async function getHeroContent() {
   const content = await client.fetch(`
     *[_type == "heroSection"][0] {
+      tagline,
       heading,
       "slides": slides[]{
         "image": asset->url
@@ -33,6 +34,7 @@ export async function getHeroContent() {
   `);
 
   return {
+    tagline: content?.tagline || "TRUSTED EXPORT PARTNER FROM INDIA",
     heading: content?.heading || fallbackHeading,
     slides:
       content?.slides?.filter((slide: { image?: string }) => Boolean(slide?.image)).map(
