@@ -97,7 +97,7 @@ export default function Navbar() {
   };
 
   return (
-    <header className="sticky top-0 z-50 border-b border-accent/10 bg-[#f8faf8]/95 backdrop-blur-xl">
+    <header className="sticky top-0 z-50 border-b border-slate-200/70 bg-[linear-gradient(180deg,rgba(255,255,255,0.98)_0%,rgba(248,250,252,0.96)_100%)] backdrop-blur-xl shadow-[0_1px_8px_rgba(15,23,42,0.03)]">
       <div className="mx-auto flex max-w-7xl items-center justify-between px-4 py-1.5 sm:px-6 sm:py-2 lg:px-8">
         <Link
           href="/"
@@ -127,8 +127,10 @@ export default function Navbar() {
 
         <nav className="hidden items-center gap-2 md:flex">
           {navigationLinks.map((link) => {
-            const isActive =
-              link.href === "/" ? pathname === "/" : pathname.startsWith(link.href);
+            const isHome = link.href === "/";
+            const isActive = isHome
+              ? pathname === "/" || pathname === "" || pathname === null
+              : pathname.startsWith(link.href);
 
             if (link.hasMenu) {
               return (
@@ -142,10 +144,10 @@ export default function Navbar() {
                   <Link
                     href={link.href}
                     onClick={handleLinkClick}
-                    className={`inline-flex items-center gap-1 rounded-full px-4 py-2 text-sm font-medium transition-colors ${
+                    className={`inline-flex items-center gap-1 rounded-full px-4 py-2 text-sm font-semibold tracking-[0.01em] transition-all duration-200 ${
                       isActive
                         ? "bg-accent text-white shadow-xs"
-                        : "text-primary/78 hover:bg-accent/6 hover:text-accent"
+                        : "text-slate-800 hover:bg-accent/8 hover:text-accent"
                     }`}
                   >
                     <span>{link.label}</span>
@@ -153,7 +155,7 @@ export default function Navbar() {
                       className={`h-4 w-4 transition-transform duration-200 ${
                         isMegaMenuOpen ? "rotate-180" : ""
                       }`}
-                      strokeWidth={2}
+                      strokeWidth={2.2}
                     />
                   </Link>
 
@@ -205,10 +207,10 @@ export default function Navbar() {
               <Link
                 key={link.href}
                 href={link.href}
-                className={`rounded-full px-4 py-2 text-sm font-medium transition-colors ${
+                className={`rounded-full px-4 py-2 text-sm font-semibold tracking-[0.01em] transition-all duration-200 ${
                   isActive
                     ? "bg-accent text-white shadow-xs"
-                    : "text-primary/78 hover:bg-accent/6 hover:text-accent"
+                    : "text-slate-800 hover:bg-accent/8 hover:text-accent"
                 }`}
               >
                 {link.label}
@@ -248,17 +250,19 @@ export default function Navbar() {
         <div className="border-t border-accent/10 bg-white md:hidden">
           <nav className="mx-auto flex max-w-6xl flex-col px-4 py-4 sm:px-6">
             {navigationLinks.map((link) => {
-              const isActive =
-                link.href === "/" ? pathname === "/" : pathname.startsWith(link.href);
+              const isHome = link.href === "/";
+              const isActive = isHome
+                ? pathname === "/" || pathname === "" || pathname === null
+                : pathname.startsWith(link.href);
 
               return (
                 <Link
                   key={link.href}
                   href={link.href}
-                  className={`rounded-2xl px-4 py-3 text-sm font-medium ${
+                  className={`rounded-2xl px-4 py-3 text-sm font-semibold tracking-[0.01em] ${
                     isActive
                       ? "bg-accent text-white"
-                      : "text-primary/80 hover:bg-accent/6 hover:text-accent"
+                      : "text-slate-800 hover:bg-accent/8 hover:text-accent"
                   }`}
                   onClick={handleLinkClick}
                 >

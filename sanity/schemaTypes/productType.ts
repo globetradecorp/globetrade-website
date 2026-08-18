@@ -15,6 +15,13 @@ export const productType = {
       validation: (Rule: { required: () => unknown }) => Rule.required(),
     },
     {
+      name: "displayOrder",
+      title: "Display Order",
+      type: "number",
+      fieldset: "core",
+      description: "Controls the exact sequence on the Homepage and Products page (e.g. 1 for first, 2 for second, 3 for third, etc.).",
+    },
+    {
       name: "slug",
       title: "Slug",
       type: "slug",

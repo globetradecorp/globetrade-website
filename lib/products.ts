@@ -114,6 +114,7 @@ export type Product = {
   name: string;
   productName: string;
   slug?: string;
+  displayOrder?: number;
   subtitle?: string;
   hsn?: string;
   details?: string[];
@@ -205,11 +206,12 @@ type RawSanityProduct = Product & {
 export async function getProducts(): Promise<Product[]> {
   try {
     const rawProducts: RawSanityProduct[] = await client.fetch(`
-      *[_type == "product"] | order(name asc) {
+      *[_type == "product"] | order(coalesce(displayOrder, 999) asc, name asc) {
         _id,
         name,
         "productName": name,
         "slug": slug.current,
+        displayOrder,
         subtitle,
         hsn,
         details,
@@ -234,13 +236,14 @@ export async function getProducts(): Promise<Product[]> {
     `);
 
     // Combine Product with its referenced Dedicated Product Page automatically
-    return (rawProducts || []).map((p) => {
+    const mapped = (rawProducts || []).map((p) => {
       const page = p.pageDoc;
       return {
         _id: p._id,
         name: p.name,
         productName: p.productName || p.name,
         slug: p.slug,
+        displayOrder: typeof p.displayOrder === "number" ? p.displayOrder : undefined,
         subtitle: p.subtitle,
         hsn: p.hsn,
         details: p.details,
@@ -257,6 +260,16 @@ export async function getProducts(): Promise<Product[]> {
         seoDescription: page?.seoDescription || p.seoDescription,
         pageSections: page?.pageSections && page.pageSections.length > 0 ? page.pageSections : p.pageSections,
       };
+    });
+
+    // Centralized deterministic sorting: primary displayOrder asc, secondary name asc
+    return mapped.sort((a, b) => {
+      const orderA = typeof a.displayOrder === "number" ? a.displayOrder : 999;
+      const orderB = typeof b.displayOrder === "number" ? b.displayOrder : 999;
+      if (orderA !== orderB) {
+        return orderA - orderB;
+      }
+      return (a.name || "").localeCompare(b.name || "");
     });
   } catch (error) {
     console.error("Failed to fetch products from Sanity:", error);
