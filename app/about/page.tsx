@@ -48,7 +48,7 @@ export default async function AboutPage() {
             key={point}
             className="flex items-start gap-3 rounded-[1.5rem] border border-border-soft bg-white px-6 py-5 shadow-sm"
           >
-            <span className="mt-2 h-2.5 w-2.5 rounded-full bg-accent" />
+            <span className="mt-2 h-2.5 w-2.5 shrink-0 rounded-full bg-accent" />
             <p className="text-base leading-8 text-slate-600">{point}</p>
           </div>
         ))}

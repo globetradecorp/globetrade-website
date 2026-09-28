@@ -501,9 +501,9 @@ export default async function ProductDetailPage({ params }: ProductPageProps) {
                             </h3>
                             <ul className="space-y-2.5">
                               {section.varieties.map((v, vIdx) => (
-                                <li key={vIdx} className="flex items-center gap-2.5 text-sm text-slate-700">
-                                  <span className="h-2 w-2 rounded-full bg-accent" />
-                                  <span className="font-medium">{v}</span>
+                                <li key={vIdx} className="flex items-start gap-2.5 text-sm text-slate-700">
+                                  <span className="mt-1.5 h-2 w-2 shrink-0 rounded-full bg-accent" />
+                                  <span className="font-medium leading-relaxed">{v}</span>
                                 </li>
                               ))}
                             </ul>
@@ -516,9 +516,9 @@ export default async function ProductDetailPage({ params }: ProductPageProps) {
                             </h3>
                             <ul className="space-y-2.5">
                               {section.specifications.map((s, sIdx) => (
-                                <li key={sIdx} className="flex items-center gap-2.5 text-sm text-slate-700">
-                                  <span className="h-2 w-2 rounded-full bg-nature" />
-                                  <span className="font-medium">{s}</span>
+                                <li key={sIdx} className="flex items-start gap-2.5 text-sm text-slate-700">
+                                  <span className="mt-1.5 h-2 w-2 shrink-0 rounded-full bg-accent" />
+                                  <span className="font-medium leading-relaxed">{s}</span>
                                 </li>
                               ))}
                             </ul>

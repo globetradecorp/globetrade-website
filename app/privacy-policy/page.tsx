@@ -10,8 +10,8 @@ export default function PrivacyPolicyPage() {
     <Section className="pb-24 pt-16 sm:pb-24 sm:pt-24">
       <div className="max-w-4xl space-y-8">
         <div className="space-y-4">
-          <h1 className="font-heading text-4xl font-bold tracking-tight text-primary sm:text-5xl">
-            Privacy Policy for Globetradecorp.com
+          <h1 className="font-heading text-[1.65rem] leading-[1.2] font-bold tracking-tight text-primary sm:text-4xl sm:leading-tight lg:text-5xl break-words">
+            Privacy Policy for globetradecorp.com
           </h1>
           <p className="text-base leading-relaxed text-slate-600">
             Effective Date: May 1, 2026
@@ -139,7 +139,7 @@ export default function PrivacyPolicyPage() {
               By Email: info@globetradecorp.com
             </p>
             <p className="text-base leading-relaxed text-slate-600">
-              By Phone: +91 8208385616
+              By Phone: +91 7498188474
             </p>
             <p className="text-base leading-relaxed text-slate-600">
               Address: Shop no. 2, Ground Floor, Gayatri Bungalow, Lane no.

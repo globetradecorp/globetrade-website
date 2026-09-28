@@ -79,7 +79,7 @@ Dhayari, Pune - 411041
 State: Maharashtra
 Country: India`,
     person: "Mr. Ram Saraf",
-    phone: "+91 8208385616",
+    phone: "+91 7498188474",
     email: "info@globetradecorp.com",
   },
 };

@@ -34,15 +34,32 @@ export default function ProductHero({ product }: ProductHeroProps) {
       {/* Hero Showcase Grid */}
       <div className="grid gap-8 rounded-[2rem] border border-border-soft bg-white p-6 shadow-xs sm:p-8 md:p-10 lg:grid-cols-[1.2fr_0.8fr] lg:gap-12 lg:items-center">
         <div className="space-y-5">
-          <div className="flex flex-wrap items-center gap-3">
-            <span className="inline-flex rounded-full border border-nature/20 bg-nature/10 px-3.5 py-1 text-xs font-semibold uppercase tracking-[0.18em] text-nature">
-              {category}
-            </span>
-            {product.hsn ? (
-              <span className="rounded-full bg-slate-100 px-3 py-1 text-xs font-semibold text-slate-600">
-                HSN {product.hsn}
+          {/* Top Row: Metadata badges on left + Mobile Product Thumbnail on right */}
+          <div className="flex items-start justify-between gap-4">
+            <div className="flex flex-wrap items-center gap-2.5 sm:gap-3">
+              <span className="inline-flex rounded-full border border-nature/20 bg-nature/10 px-3.5 py-1 text-xs font-semibold uppercase tracking-[0.18em] text-nature">
+                {category}
               </span>
-            ) : null}
+              {product.hsn ? (
+                <span className="rounded-full bg-slate-100 px-3 py-1 text-xs font-semibold text-slate-600">
+                  HSN {product.hsn}
+                </span>
+              ) : null}
+            </div>
+
+            {/* Mobile / Tablet (< lg) Product Image */}
+            <div className="lg:hidden relative h-20 w-20 sm:h-24 sm:w-24 shrink-0 overflow-hidden rounded-2xl border border-border-soft bg-[linear-gradient(180deg,rgba(93,138,58,0.06),rgba(45,167,199,0.04))] p-1.5 shadow-xs">
+              <div className="relative h-full w-full overflow-hidden rounded-xl bg-white">
+                <Image
+                  src={heroImage}
+                  alt={displayName}
+                  fill
+                  priority
+                  sizes="(max-width: 640px) 80px, 96px"
+                  className="object-cover"
+                />
+              </div>
+            </div>
           </div>
 
           <div className="space-y-2">
@@ -90,8 +107,8 @@ export default function ProductHero({ product }: ProductHeroProps) {
           </div>
         </div>
 
-        {/* Product Image Frame */}
-        <div className="relative aspect-square w-full overflow-hidden rounded-[1.75rem] border border-border-soft bg-[linear-gradient(180deg,rgba(93,138,58,0.06),rgba(45,167,199,0.04))] p-3 sm:p-4">
+        {/* Large Desktop (>= lg) Product Image Frame */}
+        <div className="hidden lg:block relative aspect-square w-full overflow-hidden rounded-[1.75rem] border border-border-soft bg-[linear-gradient(180deg,rgba(93,138,58,0.06),rgba(45,167,199,0.04))] p-3 sm:p-4">
           <div className="relative h-full w-full overflow-hidden rounded-[1.25rem] bg-white">
             <Image
               src={heroImage}
